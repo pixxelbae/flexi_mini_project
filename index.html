@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Password Strength Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Password Strength Analyzer</h1>
+      <p class="subtitle">Measures entropy, detects weak patterns, estimates crack time, and checks known data breaches using k-anonymity.</p>
+    </header>
+
+    <section class="card">
+      <label for="password" class="field-label">Enter a password to test</label>
+      <div class="input-row">
+        <input id="password" type="password" autocomplete="off" spellcheck="false" placeholder="Type a password…">
+        <button id="toggle" type="button" class="btn ghost">Show</button>
+        <button id="generate" type="button" class="btn ghost">Generate</button>
+      </div>
+      <div class="meter" id="meter" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="verdict">
+        <span id="level" class="level">Waiting for input</span>
+        <span id="bits" class="bits"></span>
+      </div>
+      <p class="note">The analysis runs entirely in your browser. Nothing is stored or sent anywhere, except the breach check below (which sends only part of a hash).</p>
+    </section>
+
+    <div id="results" hidden>
+      <div class="grid">
+        <section class="card">
+          <h2>Estimated time to crack</h2>
+          <table class="crack-table"><tbody id="crack-table"></tbody></table>
+        </section>
+        <section class="card">
+          <h2>Checklist</h2>
+          <ul id="checklist" class="checklist"></ul>
+        </section>
+      </div>
+
+      <section class="card">
+        <h2>How the score is calculated</h2>
+        <dl id="math" class="math"></dl>
+        <h3>Weak patterns found</h3>
+        <ul id="patterns" class="patterns"></ul>
+        <h3>Suggestions</h3>
+        <ul id="suggestions" class="suggestions"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Data breach check</h2>
+        <p class="muted">Checks the password against hundreds of millions of leaked passwords from <em>Have I Been Pwned</em>, without ever sending the password itself.</p>
+        <button id="breach-btn" type="button" class="btn">Check breaches</button>
+        <div id="breach-result" class="breach-result" hidden></div>
+        <ol id="breach-steps" class="steps" hidden></ol>
+      </section>
+    </div>
+  </main>
+
+  <script src="wordlists.js"></script>
+  <script src="analyzer.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
